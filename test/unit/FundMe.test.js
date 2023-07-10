@@ -16,8 +16,9 @@ describe("FundMe", function () {
 
   describe("constructor", function () {
     it("sets the aggregator address correctly", async function () {
-      const response = await fundMe.priceFeed();
-      assert.equal(response, mockV3Aggregator.address);
+      const response = await fundMe.getPriceFeed();
+      const mockAddress = await mockV3Aggregator.getAddress();
+      assert.equal(response, mockAddress);
     })
   })
 })

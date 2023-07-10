@@ -42,6 +42,14 @@ contract FundMe {
         _;
     }
 
+    receive() external payable {
+        fund();
+    }
+
+    fallback() external payable {
+        fund();
+    }
+
     function fund() public payable {
         // Want to be able to set a minimum fund amount in USD
         // require(msg.value.getConversionRate() >= minUSD, "Didn't send enough!"); // 1e18 == 1 * 10 ** 18
@@ -89,11 +97,7 @@ contract FundMe {
         // payable(msg.sender) -> payable address
     }
 
-    receive() external payable {
-        fund();
-    }
-
-    fallback() external payable {
-        fund();
+    function getPriceFeed() public view returns (AggregatorV3Interface) {
+        return priceFeed;
     }
 }
